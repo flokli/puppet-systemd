@@ -1,0 +1,14 @@
+<% $sections.each |$section| { -%>
+<% $section.each |$section_name, $section_keys| { -%>
+[<%= $section_name %>]
+<% $section_keys.each |$k, $vs| { -%>
+<% if(is_array($vs)) { -%>
+<% $vs.each |$v| { -%>
+<%= $k %>=<%= $v %>
+<% } -%>
+<% } else { -%>
+<%= $k %>=<%= $vs %>
+<% } -%>
+<% } -%>
+<% } %>
+<% } -%>
