@@ -18,6 +18,6 @@ This module is included by all further modules
  - Empties `/etc/network/interfaces`, ensures networking isn't started anymore
  - Manages the `/etc/systemd/network` directory, while purging unmanaged files.
    (Files matching 1*.(link,netdev,network) are preserved)
- - Installs a '99-default.network' file to do dhcp on all eth* and en* interfaces
+ - Installs a `99-default.network` file to do dhcp on all `eth*` and `en*` interfaces
    if nothing was configured by then
- - Takes care systemd-networkd is only restarted when all networkd files have been written
+ - Takes care `systemd-networkd` is only restarted when all networkd files have been written
