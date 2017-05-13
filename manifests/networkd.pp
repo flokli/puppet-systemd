@@ -28,7 +28,7 @@ class systemd::networkd {
     mode => '0644',
     purge => true,
     recurse => true,
-    ignore => ['1*.link', '1*.netdev', '1*.link'],
+    ignore => ['1*.link', '1*.netdev', '1*.network'],
     force => true,
   }
 
