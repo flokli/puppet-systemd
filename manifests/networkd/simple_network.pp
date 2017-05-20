@@ -10,14 +10,12 @@ define systemd::networkd::simple_network (
   Optional[String] $match_architecture = undef,
   
   Enum['yes', 'no', 'ipv4', 'ipv6'] $network_dhcp = 'yes',
-  Optional[Array[String]] $network_address = undef,
-  Optional[Array[String]] $network_gateway = undef,
-  Optional[Array[String]] $network_dns = undef,
-  Optional[Array[String]] $network_domains = undef,
+  Optional[Variant[String, Array[String]]] $network_address = undef,
+  Optional[Variant[String, Array[String]]] $network_gateway = undef,
+  Optional[Variant[String, Array[String]]] $network_dns = undef,
+  Optional[Variant[String, Array[String]]] $network_domains = undef,
   Optional[String] $network_ipv6_token = undef,
   Optional[Boolean] $network_ipv6_accept_router_advertisements = undef,
-
-  #TODO: add params for static config here
 ) {
 
   systemd::networkd::network { $title:
