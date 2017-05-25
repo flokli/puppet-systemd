@@ -32,15 +32,6 @@ class systemd::networkd {
     force => true,
   }
 
-  file { '/etc/systemd/network/99-default.network':
-    ensure => file,
-    owner => 'root',
-    group => 'root',
-    mode => '0644',
-    source => 'puppet:///modules/systemd/networkd/99-default.network',
-    notify => Service['systemd-networkd'],
-  }
-  
-  File <| notify == Service['systemd-networkd'] |> -> Service['systemd-networkd']
+  include systemd::networkd::default_network
 }
 
