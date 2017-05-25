@@ -17,6 +17,8 @@ class systemd::networkd::default_network (
   Optional[Variant[String, Array[String]]] $network_domains = undef,
   Optional[String] $network_ipv6_token = undef,
   Optional[Boolean] $network_ipv6_accept_router_advertisements = undef,
+
+  Optional[Hash] $additional_sections = {},
 ) {
   systemd::networkd::network { '99-default':
     filename => '99-default.network',
@@ -40,7 +42,8 @@ class systemd::networkd::default_network (
         'Domains' => $network_domains,
         'IPv6Token' => $network_ipv6_token,
         'IPv6AcceptRouterAdvertisements' => $network_ipv6_accept_router_advertisements,
-      }.filter |$k, $v| { $v != undef }}
+      }.filter |$k, $v| { $v != undef }} +
+      $additional_sections
     ],
   }
 }
