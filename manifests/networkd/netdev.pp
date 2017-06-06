@@ -4,7 +4,7 @@ define systemd::networkd::netdev (
   Optional[String] $mtu_bytes = undef,
   Optional[String] $mac_address = undef,
   String $filename = "60-${title}.netdev",
-  Array $sections = {}
+  Array $sections = []
 ) {
   # assemble [NetDev] section
   $netdev_section = {
