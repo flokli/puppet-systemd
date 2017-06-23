@@ -4,13 +4,13 @@ define systemd::networkd::config (
 ) {
 
   file { "/etc/systemd/network/${filename}":
-    ensure => file,
-    owner => 'root',
-    group => 'root',
-    mode => '0644',
+    ensure  => file,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
     content => epp('systemd/networkd/config.epp', {
       'sections' => $sections,
     }),
-    notify => Service['systemd-networkd'],
+    notify  => Service['systemd-networkd'],
   }
 }

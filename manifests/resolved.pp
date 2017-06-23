@@ -8,15 +8,15 @@ class systemd::resolved {
   }
 
   service { 'systemd-resolved':
-    ensure => 'running',
-    enable => true,
+    ensure  => 'running',
+    enable  => true,
     require => Service['systemd-networkd']
   }
-  
+
   file { '/etc/resolv.conf':
     ensure => link,
     target => '/run/systemd/resolve/resolv.conf',
-    
+
     # use systemd-resolved directly. currently kind of unreliable
     # target => '/lib/systemd/resolv.conf',
   }
