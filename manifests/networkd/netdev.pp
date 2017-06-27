@@ -15,8 +15,7 @@ define systemd::networkd::netdev (
     'MACAddress' => $mac_address,
   }.filter |$k, $v| { $v != undef }
 
-  systemd::networkd::config { "${title}.netdev":
-    filename => $filename,
+  systemd::networkd::config { $filename:
     sections => [{'NetDev' => $netdev_section}] + $sections,
   }
 }
