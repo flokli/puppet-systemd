@@ -1,4 +1,5 @@
 # puppet-systemd
+[![Build Status](https://travis-ci.org/flokli/puppet-systemd.svg?branch=master)](https://travis-ci.org/flokli/puppet-systemd)
 
 This module manages systemd and its services.
 
