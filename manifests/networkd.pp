@@ -1,5 +1,6 @@
 class systemd::networkd {
   include systemd
+
   service { 'systemd-networkd':
     ensure => 'running',
     enable => true,
@@ -11,14 +12,12 @@ class systemd::networkd {
       enable  => mask,
       require => Service['systemd-networkd']
     }
-    if($::lsbdistcodename == 'jessie') {
-      file { '/etc/network/interfaces':
-        ensure => file,
-        owner  => 'root',
-        group  => 'root',
-        mode   => '0644',
-        source => 'puppet:///modules/systemd/networkd/etc_network_interfaces',
-      }
+    file { '/etc/network/interfaces':
+      ensure => file,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644',
+      source => 'puppet:///modules/systemd/networkd/etc_network_interfaces',
     }
   }
   file { '/etc/systemd/network':
