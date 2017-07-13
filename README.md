@@ -4,7 +4,8 @@
 This module manages systemd and its services.
 
 ## Supported distributions
- - Debian (Jessie, Stretch)
+ - Debian (Jessie and later)
+ - Ubuntu (Yakkety and later)
  - Archlinux
 
 ## Modules
