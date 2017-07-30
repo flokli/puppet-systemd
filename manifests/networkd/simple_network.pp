@@ -15,7 +15,7 @@ define systemd::networkd::simple_network (
   Optional[Variant[String, Array[String]]] $network_dns = undef,
   Optional[Variant[String, Array[String]]] $network_domains = undef,
   Optional[String] $network_ipv6_token = undef,
-  Optional[Boolean] $network_ipv6_accept_router_advertisements = undef,
+  Optional[Boolean] $network_ipv6_accept_ra = undef,
 
   Array[Hash] $additional_sections = [],
 ) {
@@ -34,13 +34,13 @@ define systemd::networkd::simple_network (
         'Architecture'      => $match_architecture,
       }.filter |$k, $v| { $v != undef }},
       {'Network' => {
-        'DHCP'                           => $network_dhcp,
-        'Address'                        => $network_address,
-        'Gateway'                        => $network_gateway,
-        'DNS'                            => $network_dns,
-        'Domains'                        => $network_domains,
-        'IPv6Token'                      => $network_ipv6_token,
-        'IPv6AcceptRouterAdvertisements' => $network_ipv6_accept_router_advertisements,
+        'DHCP'         => $network_dhcp,
+        'Address'      => $network_address,
+        'Gateway'      => $network_gateway,
+        'DNS'          => $network_dns,
+        'Domains'      => $network_domains,
+        'IPv6Token'    => $network_ipv6_token,
+        'IPv6AcceptRA' => $network_ipv6_accept_ra,
       }.filter |$k, $v| { $v != undef }}
     ] + $additional_sections,
   }
