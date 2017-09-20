@@ -16,6 +16,7 @@ define systemd::networkd::simple_network (
   Optional[Variant[String, Array[String]]] $network_domains = undef,
   Optional[String] $network_ipv6_token = undef,
   Optional[Boolean] $network_ipv6_accept_ra = undef,
+  Optional[Boolean] $network_unmanaged = undef,
 
   Array[Hash] $additional_sections = [],
 ) {
@@ -41,6 +42,7 @@ define systemd::networkd::simple_network (
         'Domains'      => $network_domains,
         'IPv6Token'    => $network_ipv6_token,
         'IPv6AcceptRA' => $network_ipv6_accept_ra,
+        'Unmanaged'    => $network_unmanaged,
       }.filter |$k, $v| { $v != undef }}
     ] + $additional_sections,
   }
