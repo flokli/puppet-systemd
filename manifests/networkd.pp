@@ -1,4 +1,6 @@
-class systemd::networkd {
+class systemd::networkd (
+  Hash $simple_networks = {}
+) {
   include systemd
 
   service { 'systemd-networkd':
@@ -31,6 +33,10 @@ class systemd::networkd {
     force   => true,
   }
 
+  # lookup simple_networks in hiera and instantiate them
+  create_resources(systemd::networkd::simple_network, $simple_networks)
+
   include systemd::networkd::default_network
+
 }
 
