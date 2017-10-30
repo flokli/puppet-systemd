@@ -18,10 +18,13 @@ define systemd::networkd::simple_network (
   Optional[Boolean] $network_ipv6_accept_ra = undef,
   Optional[Boolean] $network_unmanaged = undef,
 
+  Optional[String] $priority = undef,
+
   Array[Hash] $additional_sections = [],
 ) {
 
   systemd::networkd::network { $title:
+    priority => $priority,
     sections => [
       {'Match' => {
         'MACAddress'        => $match_mac_address,
