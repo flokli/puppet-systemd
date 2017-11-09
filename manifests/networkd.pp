@@ -8,7 +8,7 @@ class systemd::networkd (
     enable => true,
   }
 
-  if($::osfamily == 'debian') {
+  if($facts['os']['family'] == 'debian') {
     service { 'networking':
       ensure  => stopped,
       enable  => mask,
