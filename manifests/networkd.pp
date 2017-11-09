@@ -9,9 +9,15 @@ class systemd::networkd (
   }
 
   if($facts['os']['family'] == 'debian') {
+    if($facts['os']['lsb']['distcodename'] == 'jessie') {
+      $enable_mask = false
+    }
+    else {
+      $enable_mask = mask
+    }
     service { 'networking':
       ensure  => stopped,
-      enable  => mask,
+      enable  => $enable_mask,
       require => Service['systemd-networkd']
     }
     file { '/etc/network/interfaces':
