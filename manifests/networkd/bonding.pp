@@ -6,6 +6,12 @@ define systemd::networkd::bonding (
         '802.3ad',
         'balance-tlb',
         'balance-alb'] $mode = '802.3ad',
+  Enum['layer2',
+        'layer2+3',
+        'layer3+4',
+        'encap2+3',
+        'encap3+4'] $transmit_hash_policy = undef,
+
   Optional[String] $match_mac_address = undef,
   Optional[String] $match_path = undef,
   Optional[String] $match_driver = undef,
@@ -20,8 +26,9 @@ define systemd::networkd::bonding (
     kind     => 'bond',
     sections => [
       {'Bond' => {
-        'Mode' => $mode,
-      }}
+        'Mode'               => $mode,
+        'TransmitHashPolicy' => $transmit_hash_policy,
+      }.filter |$k, $v| { $v != undef }},
     ],
   }
 
