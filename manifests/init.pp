@@ -21,13 +21,24 @@ class systemd {
       include apt
       include apt::backports
 
-      apt::pin {'systemd-backports':
-        packages => ['systemd', 'libsystemd0', 'libpam-systemd', 'libapparmor1', 'systemd-sysv', 'udev', 'libudev1', 'ifupdown'],
-        release  => "${::lsbdistcodename}-backports",
-        priority => 501,
-        notify   => Exec['apt_update'],
+      if($::lsbdistcodename == 'jessie') {
+        apt::pin {'systemd-backports':
+          packages => ['systemd', 'libsystemd0', 'libpam-systemd', 'libapparmor1', 'systemd-sysv', 'udev', 'libudev1', 'ifupdown'],
+          release  => "${::lsbdistcodename}-backports",
+          priority => 501,
+          notify   => Exec['apt_update'],
+        }
+        Apt::Pin['systemd-backports'] -> Package['systemd']
       }
-      Apt::Pin['systemd-backports'] -> Package['systemd']
+      if($::lsbdistcodename == 'stretch') {
+        apt::pin {'systemd-unstable':
+          packages => ['systemd', 'libsystemd0', 'libpam-systemd', 'libapparmor1', 'systemd-sysv', 'udev', 'libudev1', 'ifupdown'],
+          release  => 'unstable',
+          priority => 501,
+          notify   => Exec['apt_update'],
+        }
+        Apt::Pin['systemd-unstable'] -> Package['systemd']
+      }
       Class['apt::update'] -> Package['systemd']
     }
   }
