@@ -20,9 +20,10 @@ class systemd {
     if($::lsbdistcodename in ['jessie', 'stretch']) {
       include apt
       include apt::backports
+
       apt::pin {'systemd-backports':
         packages => ['systemd', 'libsystemd0', 'libpam-systemd', 'libapparmor1', 'systemd-sysv', 'udev', 'libudev1', 'ifupdown'],
-        release  => 'jessie-backports',
+        release  => "${::lsbdistcodename}-backports",
         priority => 501,
         notify   => Exec['apt_update'],
       }
