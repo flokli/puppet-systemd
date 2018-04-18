@@ -17,7 +17,7 @@ class systemd {
     }
 
     # on jessie, pin systemd from backports
-    if($::lsbdistcodename == 'jessie') {
+    if($::lsbdistcodename in ['jessie', 'stretch']) {
       include apt
       include apt::backports
       apt::pin {'systemd-backports':
