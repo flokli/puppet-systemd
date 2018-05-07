@@ -8,8 +8,8 @@ class systemd::networkd (
     enable => true,
   }
 
-  if($facts['os']['family'] == 'debian') {
-    if($facts['os']['lsb']['distcodename'] == 'jessie') {
+  if($::osfamily == 'debian') {
+    if($::lsbdistcodename == 'jessie') {
       $enable_mask = false
     }
     else {
